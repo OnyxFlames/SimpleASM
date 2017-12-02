@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "SimpleASM.hpp"
+#include "Lexer.hpp"
+#include "Utils.hpp"
 
 int main(int argc, char* argv[])
 {
-	SimpleASM sasm;
-	sasm.load("test.sasm");
-	sasm.emit("test.c");
+	Lexer::lex_tokens(
+		filetostring(std::ifstream("../test.sasm")));
+	getchar();
 	return 0;
 }

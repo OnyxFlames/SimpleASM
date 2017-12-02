@@ -12,5 +12,6 @@ public:
 	Lexer();
 	~Lexer();
 	static std::vector<Token> lex_tokens(std::string _prog);
+	static std::vector<Token> get_tokens();
 };
 

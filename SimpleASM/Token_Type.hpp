@@ -1,0 +1,12 @@
+#pragma once
+
+enum Token_Type
+{
+	UNKNOWN,
+	OPCODE,
+	IDENTIFIER,
+	INTLITERAL,
+	FLOATLITERAL,
+	STRINGLITERAL,
+
+};

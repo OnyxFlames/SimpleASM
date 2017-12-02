@@ -25,10 +25,20 @@ std::vector<Token> Lexer::lex_tokens(std::string _prog)
 			buff += *it++;
 			while (isalnum(*it))
 			{
-				if (it == _prog.end())
+				//print_iterator(_prog, it);
+				if (it + 1 == _prog.end())
+				{
+					buff += *it;
+					if (is_opcode(buff))
+						token_vector.push_back(Token(OPCODE, buff));
+					else if (is_datatype(buff))
+						token_vector.push_back(Token(DATATYPE, buff));
+					else
+						token_vector.push_back(Token(IDENTIFIER, buff));
+					buff = "";
 					return token_vector;
+				}
 				buff += *it++;
-				print_iterator(_prog, it);
 			}
 			if (isspace(*it))
 			{
@@ -44,6 +54,30 @@ std::vector<Token> Lexer::lex_tokens(std::string _prog)
 			{
 				if (*it == ':')
 					token_vector.push_back(Token(LABELIDENTIFIER, buff));
+				else if (*it == '\"')
+				{
+					while (isalnum(*it) || ispunct(*it))
+					{
+						if (it + 1 == _prog.end() && *it == '"')
+						{
+							token_vector.push_back(Token(STRINGLITERAL, buff));
+							buff = "";
+							return token_vector;
+						}
+						buff += *it++;
+					}
+					if (isspace(*it) && *(it - 1) != '"')
+					{
+						token_vector.push_back(Token(ERRORTOKEN, buff));
+					}
+					else
+					{
+						// For some reason the " remains if we branch here, so remove it.
+						buff.erase(buff.end()-1);
+						token_vector.push_back(Token(STRINGLITERAL, buff));
+						buff = "";
+					}
+				}
 				else
 					token_vector.push_back(Token(ERRORTOKEN, buff));
 			}

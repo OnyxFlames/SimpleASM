@@ -6,8 +6,11 @@
 
 int main(int argc, char* argv[])
 {
-	Lexer::lex_tokens(
-		filetostring(std::ifstream("../test.sasm")));
+	for (const auto& t : Lexer::lex_tokens(
+		filetostring(std::ifstream("../test.sasm"))))
+	{
+		std::cout << "[" << tokentypetostring(t.type) << "]\t\'" << t.value << "\'\n";
+	}
 	getchar();
 	return 0;
 }

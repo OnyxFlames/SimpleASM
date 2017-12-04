@@ -30,7 +30,7 @@ std::string tokentypetostring(Token_Type tok)
 		{UNKNOWN, "Unknown"},
 		{OPCODE, "Opcode"},
 		{IDENTIFIER, "Identifier"},
-		{LABELIDENTIFIER, "LabelIdentifier"},
+		{LABELIDENTIFIER, "Label"},
 		{DATATYPE, "Datatype"},
 		{INTLITERAL, "IntLiteral"},
 		{FLOATLITERAL, "FloatLiteral"},

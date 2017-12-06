@@ -3,14 +3,15 @@
 
 #include "Lexer.hpp"
 #include "Utils.hpp"
+#include "SimpleASM.hpp"
 
 int main(int argc, char* argv[])
 {
-	for (const auto& t : Lexer::lex_tokens(
-		filetostring(std::ifstream("../test.sasm"))))
-	{
-		std::cout << "[" << tokentypetostring(t.type) << "]\t\'" << t.value << "\'\n";
-	}
+	SimpleASM sasm;
+	sasm.emit(
+		Lexer::lex_tokens(
+			filetostring(
+				std::ifstream("../test.sasm"))));
 	getchar();
 	return 0;
 }

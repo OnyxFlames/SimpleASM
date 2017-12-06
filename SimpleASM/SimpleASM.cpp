@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cstdint>
 
+#include "Utils.hpp"
 
 
 const std::string header_text =
@@ -33,17 +34,30 @@ void to_lower(std::string& _val)
 SimpleASM::SimpleASM()
 {
 }
-
-
-void SimpleASM::emit(const std::string & _file)
+// Very primitive way to emit code.
+// This is more for proof-of-concept before a proper parse-tree is developed.
+void SimpleASM::emit(std::vector<Token> _tokens)
 {
-	std::ofstream file(_file);
-
-	if (!file.is_open())
+	std::string emit_string = "";
+	std::cout << "Token vector size: " << _tokens.size() << '\n';
+	for (auto beg = _tokens.begin(); beg < _tokens.end(); beg++)
 	{
-		std::cerr << "Failed to load source file.\n";
-		std::exit(0);
+		if (beg->type == OPCODE)
+		{
+			if ((beg)->value == "hlt")
+			{
+				beg++;
+				emit_string += "exit(" + beg->value + ");\n";
+			}
+			else
+			{
+			}
+		}
+		else
+		{
+		}
 	}
+	std::cout << emit_string << "\n";
 }
 
 

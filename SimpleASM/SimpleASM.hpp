@@ -51,6 +51,6 @@ private:
 	std::vector<Token> tokens;
 public:
 	SimpleASM();
-	void emit(const std::string& _file);
+	void emit(std::vector<Token> _tokens);
 	~SimpleASM();
 };

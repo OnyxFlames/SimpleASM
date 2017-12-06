@@ -25,7 +25,6 @@ std::vector<Token> Lexer::lex_tokens(std::string _prog)
 			buff += *it++;
 			while (isalnum(*it))
 			{
-				//print_iterator(_prog, it);
 				if (it + 1 == _prog.end())
 				{
 					buff += *it;
@@ -83,10 +82,10 @@ std::vector<Token> Lexer::lex_tokens(std::string _prog)
 			}
 
 		}
-		if (isalnum(*it))
+		if (isdigit(*it))
 		{
 			buff += *it;
-			while (isalnum(*it++))
+			while (isdigit(*it++))
 			{
 				buff += *it;
 			}
